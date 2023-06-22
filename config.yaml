@@ -248,6 +248,8 @@ plugins:
           enable_pipeline: true
           #dial_addr: "ip:port"
           #enable_http3: true
+        - addr: "tls://1.0.0.1"
+          enable_pipeline: true    
 
   # 主要的运行逻辑插件
   # sequence 插件中调用的插件 tag 必须在 sequence 前定义
