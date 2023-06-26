@@ -381,9 +381,9 @@ servers:
     timeout: 6
     listeners:
       - protocol: udp
-        addr: "0.0.0.0:5353"
+        addr: "127.0.0.1:5353"
       - protocol: tcp
-        addr: "0.0.0.0:5353"
+        addr: "127.0.0.1:5353"
       #- protocol: http
       #  addr: "127.0.0.1:9053"
       #  url_path: "/dns-query"
