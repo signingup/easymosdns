@@ -250,12 +250,12 @@ plugins:
     type: fast_forward
     args:
       upstream:
-        - addr: "tls://1.1.1.1:853"
+        - addr: "https://1.0.0.1/dns-query"
           enable_pipeline: true
-          #dial_addr: "ip:port"
-          #enable_http3: true
-        - addr: "tls://1.0.0.1:853"
-          enable_pipeline: true    
+          #socks5: "127.0.0.1:1080"
+        - addr: "https://1.1.1.1/dns-query"
+          enable_pipeline: true
+          #socks5: "127.0.0.1:1080" 
 
   # 主要的运行逻辑插件
   # sequence 插件中调用的插件 tag 必须在 sequence 前定义
