@@ -238,10 +238,10 @@ plugins:
         - addr: "https://1.1.1.1/dns-query"
           enable_pipeline: true
           #socks5: "127.0.0.1:1080"          
-        - addr: "https://dns.google/dns-query"
-          ip_addr:
-            - "8.8.8.8"
-            - "8.8.4.4"
+        - addr: "https://8.8.8.8/dns-query"
+          enable_pipeline: true
+          #socks5: "127.0.0.1:1080"
+        - addr: "https://8.8.4.4/dns-query"
           enable_pipeline: true
           #socks5: "127.0.0.1:1080"
 
