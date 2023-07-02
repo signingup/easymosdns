@@ -403,5 +403,5 @@ servers:
       #  cert: "/etc/mosdns/yourdomain.cert"  # TLS 所需证书文件。
       #  key: "/etc/mosdns/yourdomain.key"    # TLS 所需密钥文件。
 
-api:
-    http: "0.0.0.0:9080"
+#api:
+#    http: "0.0.0.0:9080"
