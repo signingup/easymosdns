@@ -232,16 +232,10 @@ plugins:
     type: fast_forward
     args:
       upstream:
-        - addr: "https://1.0.0.1/dns-query"
+        - addr: "tcp://208.67.220.220:5353"
           enable_pipeline: true
           #socks5: "127.0.0.1:1080"
-        - addr: "https://1.1.1.1/dns-query"
-          enable_pipeline: true
-          #socks5: "127.0.0.1:1080"          
-        - addr: "https://8.8.8.8/dns-query"
-          enable_pipeline: true
-          #socks5: "127.0.0.1:1080"
-        - addr: "https://8.8.4.4/dns-query"
+        - addr: "tls://8.8.4.4"
           enable_pipeline: true
           #socks5: "127.0.0.1:1080"
 
@@ -250,12 +244,10 @@ plugins:
     type: fast_forward
     args:
       upstream:
-        - addr: "https://1.0.0.1/dns-query"
-          enable_pipeline: true
-          #socks5: "127.0.0.1:1080"
-        - addr: "https://1.1.1.1/dns-query"
-          enable_pipeline: true
-          #socks5: "127.0.0.1:1080" 
+        - addr: "https://doh.apad.pro/dns-query"
+          bootstrap: "119.29.29.29"
+          #dial_addr: "ip:port"
+          #enable_http3: true
 
   # 主要的运行逻辑插件
   # sequence 插件中调用的插件 tag 必须在 sequence 前定义
@@ -391,9 +383,9 @@ servers:
     timeout: 6
     listeners:
       - protocol: udp
-        addr: "0.0.0.0:5353"
+        addr: "0.0.0.0:53"
       - protocol: tcp
-        addr: "0.0.0.0:5353"
+        addr: "0.0.0.0:53"
       #- protocol: http
       #  addr: "127.0.0.1:9053"
       #  url_path: "/dns-query"
@@ -404,4 +396,4 @@ servers:
       #  key: "/etc/mosdns/yourdomain.key"    # TLS 所需密钥文件。
 
 #api:
-#    http: "0.0.0.0:9080"
+#    http: "127.0.0.1:9080"
