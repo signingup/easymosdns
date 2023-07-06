@@ -223,13 +223,8 @@ plugins:
     type: fast_forward
     args:
       upstream:
-        - addr: "223.5.5.5"
-        - addr: "223.6.6.6"
-        - addr: "180.76.76.76"
-        - addr: "https://223.5.5.5/dns-query"
-        - addr: "https://223.6.6.6/dns-query"
-        - addr: "tls://120.53.53.53:853"
-          enable_pipeline: true
+        - addr: "https://dns.alidns.com/dns-query"
+        - addr: "https://doh.pub/dns-query"
 
   # 转发至远程服务器的插件
   - tag: forward_remote
