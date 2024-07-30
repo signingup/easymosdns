@@ -4,7 +4,7 @@
 
 ## About Mosdns
 
-[Mosdns](https://github.com/IrineSistiana/mosdns) 是一个插件化的DNS转发/分流器。用户可以按需拼接插件，搭建适合自己的DNS服务器。<br />
+[Mosdns](https://github.com/pmkol/mosdns) 是一个插件化的DNS转发/分流器。用户可以按需拼接插件，搭建适合自己的DNS服务器。<br />
 
 配置灵活的优点可以满足各种场景下的DNS使用，相对也会有较高的使用门槛，无法开箱即用。<br />
 <br />
