@@ -236,6 +236,8 @@ plugins:
         - addr: "https://dns.google/dns-query"
           bootstrap: "8.8.8.8"
           enable_pipeline: false
+        - addr: "tls://8.8.4.4:853"
+          enable_pipeline: true
           #socks5: "127.0.0.1:1080"         
   # 转发至分流服务器的插件
   - tag: forward_easymosdns
@@ -244,7 +246,8 @@ plugins:
       upstream:
         - addr: "https://cloudflare-dns.com/dns-query"
           bootstrap: "1.1.1.1"
-          enable_pipeline: false
+        - addr: "tls://1.0.0.1:853"
+          enable_pipeline: true
           #socks5: "127.0.0.1:1080"
 
   # 主要的运行逻辑插件
@@ -292,7 +295,7 @@ plugins:
         - if: query_is_noncn_domain
           exec:
             # 优先返回ipv4结果
-            - _prefer_ipv4
+            #- _prefer_ipv4
             - ecs_global
             - primary:
                 # 默认用分流服务器
@@ -334,7 +337,7 @@ plugins:
         - if: query_is_non_local_domain
           exec:
             # 优先返回ipv4结果
-            - _prefer_ipv4
+            #- _prefer_ipv4
             - ecs_global
             - primary:
                 # 默认用分流服务器
@@ -349,7 +352,7 @@ plugins:
 
         # 剩下的未知域名用IP分流
         # 优先返回ipv4结果
-        - _prefer_ipv4
+        #- _prefer_ipv4
         - primary:
             # 默认用分流服务器
             - forward_easymosdns
