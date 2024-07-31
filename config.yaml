@@ -32,6 +32,12 @@ data_providers:
   - tag: hosts
     file: ./hosts.txt
     auto_reload: true
+  - tag: geosite
+    file: "/etc/mosdns/dlc.dat"
+    auto_reload: true
+  - tag: geoip
+    file: "/etc/mosdns/geoip.dat"
+    auto_reload: true
 
 plugins:
   # 缓存的插件
@@ -67,7 +73,7 @@ plugins:
     args:
       auto: true
       force_overwrite: false
-      
+
   # 指定ECS的插件
   - tag: ecs_global
     type: ecs
@@ -81,7 +87,7 @@ plugins:
   - tag: ecs_is_lan
     type: query_matcher
     args:
-      ecs: 
+      ecs:
         - "0.0.0.0/8"
         - "10.0.0.0/8"
         - "100.64.0.0/10"
@@ -102,7 +108,7 @@ plugins:
   - tag: ecs_is_cn
     type: query_matcher
     args:
-      ecs: 
+      ecs:
         - "provider:chinaip"
 
   # 调整TTL的插件
@@ -167,14 +173,14 @@ plugins:
     type: query_matcher
     args:
       domain:
-        - "provider:chinalist"
+        - "provider:geosite:cn"
 
   # 匹配污染域名的插件
   - tag: query_is_non_local_domain
     type: query_matcher
     args:
       domain:
-        - "provider:gfwlist"
+        - "provider:geosite:geolocation-!cn"
 
   # 匹配CDN域名的插件
   - tag: query_is_cdn_cn_domain
@@ -188,7 +194,7 @@ plugins:
     type: query_matcher
     args:
       domain:
-        - "provider:adlist"
+        - "provider:geosite:category-ads-all"
 
   # 匹配强制本地解析域名的插件
   - tag: query_is_cn_domain
@@ -209,7 +215,7 @@ plugins:
     type: response_matcher
     args:
       ip:
-        - "provider:chinaip"
+        - "provider:geoip:cn"
 
   # 匹配污染IP的插件
   - tag: response_has_gfw_ip
@@ -232,13 +238,12 @@ plugins:
   - tag: forward_remote
     type: fast_forward
     args:
-      upstream:        
+      upstream:
         - addr: "https://dns.google/dns-query"
           bootstrap: "8.8.8.8"
-          enable_pipeline: false
         - addr: "tls://8.8.4.4:853"
-          enable_pipeline: true
-          #socks5: "127.0.0.1:1080"         
+          enable_pipeline: false
+          #socks5: "127.0.0.1:1080"
   # 转发至分流服务器的插件
   - tag: forward_easymosdns
     type: fast_forward
@@ -247,7 +252,7 @@ plugins:
         - addr: "https://cloudflare-dns.com/dns-query"
           bootstrap: "1.1.1.1"
         - addr: "tls://1.0.0.1:853"
-          enable_pipeline: true
+          enable_pipeline: false
           #socks5: "127.0.0.1:1080"
 
   # 主要的运行逻辑插件
@@ -384,14 +389,14 @@ servers:
     timeout: 6
     listeners:
       - protocol: udp
-        addr: "0.0.0.0:53"
+        addr: "0.0.0.0:5353"
       - protocol: tcp
-        addr: "0.0.0.0:53"
+        addr: "0.0.0.0:5353"
       #- protocol: http
       #  addr: "127.0.0.1:9053"
       #  url_path: "/dns-query"
       #  get_user_ip_from_header: "X-Forwarded-For"
-      #- protocol: tls             
+      #- protocol: tls
       #  addr: "0.0.0.0:853"
       #  cert: "/etc/mosdns/yourdomain.cert"  # TLS 所需证书文件。
       #  key: "/etc/mosdns/yourdomain.key"    # TLS 所需密钥文件。
