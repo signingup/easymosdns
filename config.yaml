@@ -33,10 +33,10 @@ data_providers:
     file: ./hosts.txt
     auto_reload: true
   - tag: geosite
-    file: "/etc/mosdns/dlc.dat"
+    file: "/etc/mosdns/rules/dlc.dat"
     auto_reload: true
   - tag: geoip
-    file: "/etc/mosdns/geoip.dat"
+    file: "/etc/mosdns/rules/geoip.dat"
     auto_reload: true
 
 plugins:
