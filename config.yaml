@@ -299,8 +299,8 @@ plugins:
         # 强制用非本地服务器解析
         - if: query_is_noncn_domain
           exec:
-            # 优先返回ipv6结果
-            #- _prefer_ipv6
+            # 优先返回ipv4结果
+            - _prefer_ipv4
             - ecs_global
             - primary:
                 # 默认用分流服务器
@@ -341,8 +341,8 @@ plugins:
         # 已知的污染域名用分流服务器或远程服务器解析
         - if: query_is_non_local_domain
           exec:
-            # 优先返回ipv6结果
-            #- _prefer_ipv6
+            # 优先返回ipv4结果
+            - _prefer_ipv4
             - ecs_global
             - primary:
                 # 默认用分流服务器
@@ -356,8 +356,8 @@ plugins:
             - _return
 
         # 剩下的未知域名用IP分流
-        # 优先返回ipv6结果
-        #- _prefer_ipv6
+        # 优先返回ipv4结果
+        - _prefer_ipv4
         - primary:
             # 默认用分流服务器
             - forward_easymosdns
